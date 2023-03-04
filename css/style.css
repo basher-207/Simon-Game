@@ -1,0 +1,83 @@
+/* Color Theme Swatches in Hex */
+.Game-Art-•-Concept-1-hex { color: #2F2ABF; }
+.Game-Art-•-Concept-2-hex { color: #122459; }
+.Game-Art-•-Concept-3-hex { color: #F2BE22; }
+.Game-Art-•-Concept-4-hex { color: #F23005; }
+.Game-Art-•-Concept-5-hex { color: #D9D9D9; }
+
+body{
+    background-color: #0d183d;
+    color: #D9D9D9;
+    text-align: center;
+    font-family: 'Press Start 2P', cursive;
+}
+
+h1{
+    margin: 5rem 2rem;
+    font-size: 2.5rem;
+}
+
+div{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 3rem;
+    margin: 3rem;
+}
+
+.color{
+    width: 200px;
+    height: 200px;
+
+    border: 0.5rem solid #010a26;
+    border-radius: 2rem;
+}
+
+.first{
+    background-color: #eabb2e;
+}
+
+.second{
+    background-color: #4641eb;
+}
+
+.third{
+    background-color: #D9D9D9;
+}
+
+.fourth{
+    background-color: #f14e2a;
+}
+
+.hint{
+    color: #0d183d;
+    border: none;
+    border-radius: 1rem;
+    background-color: #D9D9D9;
+    font-family: 'Press Start 2P', cursive;
+    padding: 0.5rem 1rem;
+    margin-bottom: 3rem;
+    opacity: 0.4;
+}
+
+.hint:hover{
+    opacity: 0.8;
+}
+
+/* Clicked */
+
+.color-cl{
+    box-shadow: 0 0 2rem white ;
+    background-color: #0d183d;
+}
+
+.hint-cl{
+    color: #D9D9D9;
+    background-color: #0d183d;
+    opacity: 1;
+    box-shadow: 0 0 1rem white;
+}
+
+.gameover{
+    background-color: red;
+}
