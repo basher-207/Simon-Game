@@ -64,6 +64,10 @@ div{
     opacity: 0.8;
 }
 
+.color:hover{
+    opacity: 0.8;
+}
+
 /* Clicked */
 
 .color-cl{
