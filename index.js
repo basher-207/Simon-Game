@@ -6,25 +6,25 @@ let playerIsAllowedToChoise = false;
 let gameArr = [];
 let playerArr = [];
 
-//First page view
-$("h1").addClass("start-for-h1");
+//Hiding the hint
+$("#Hint").hide();
 
 // Starting the game
 $(document).keypress((i)=>{
     if(i.key == "Enter" && gameIsStarted == false){
+        gameIsStarted = true;
 
         // Game view
-        $("h1").slideUp();
+        $("h1, footer").slideUp();
         $("body").removeClass("game-over");
-
 
         // Animation
         setTimeout(() => {
-            $("#main-section, footer").removeClass(".hide");
+            $("#main-section").removeClass(".hide");
             $("h1").removeClass("start-for-h1");
             $("h1").text("Lvl " + (gameArr.length + 1));
             $("h1").slideDown();
-            $("#main-section, footer").slideDown();
+            $("#main-section").slideDown();
         }, 400);
         
         // Setting array to 0
@@ -33,11 +33,10 @@ $(document).keypress((i)=>{
         setTimeout(() => {
             newLvl();
         }, 800);
-        
     }
 });
 
-async function newLvl() {
+function newLvl() {
     // Setting player array to 0
     playerArr = [];
 
@@ -45,16 +44,27 @@ async function newLvl() {
     $("h1").text("Lvl " + (gameArr.length + 1));
 
     // Computer rselecting a random button
-    await computerRandomChoise();
+    setTimeout(() => {
+        computerRandomChoise();
+    }, 400);
+
+    // Player get acces to click the buttons
+    playerIsAllowedToChoise = true
+    
+    // Player is allowed to click "hint" button         
+    if(gameArr.length >=3){
+        // "Hint" button appear
+        $("#Hint").fadeOut([1000]).fadeIn();
+        hintClickEvent();
+    };
 
     // Player is allowed to click one button
     if(playerIsAllowedToChoise == true){
         setTimeout(() => {
             userChoise();
         }, 200);
-    }
-    
-}
+    };
+};
 
 function computerRandomChoise(){
     let randomNumber = Math.floor(Math.random()*4);
@@ -62,28 +72,44 @@ function computerRandomChoise(){
     // Adding name of the button to game array
     gameArr.push(AviableButtons[randomNumber].name);
     
-    setTimeout(() => {
-        // Sound
-        let sound = new Audio("sounds/" + AviableButtons[randomNumber].name + ".mp3");
-        sound.play();
+    // Sound
+    let sound = new Audio("sounds/" + AviableButtons[randomNumber].name + ".mp3");
+    sound.play();
 
-        // Animation
-        setTimeout(() => {
-            $(".color[name='" + AviableButtons[randomNumber].name + "']").addClass("color-cl");
-        setTimeout(() => {
-            $(".color[name='" + AviableButtons[randomNumber].name + "']").removeClass("color-cl")
-        }, 100);
-        }, 400);
-        
-    }, 400);
-    
-    
-    // Player get acces to click the buttons
-    playerIsAllowedToChoise = true;
-}
+    // Animation
+    $(".color[name='" + AviableButtons[randomNumber].name + "']").addClass("color-cl");
+    setTimeout(() => {
+        $(".color[name='" + AviableButtons[randomNumber].name + "']").removeClass("color-cl")
+    }, 100);
+};
+
+async function hintClickEvent(){
+    $("#Hint").click(()=>{
+        // Disabling clicking on "hint" button
+        $("#Hint").off("click");
+
+        for(let i = 0; i < gameArr.length; i++){
+            buttonClickingHint(i);
+        };
+
+        // Hide the "hint" button
+        $("#Hint").fadeOut();
+    });
+};
+
+function buttonClickingHint(i) {
+    setTimeout(() => {
+        $(".color[name='" + gameArr[i] + "']").fadeOut([200]);
+        $(".color[name='" + gameArr[i] + "']").fadeIn([200]);
+    }, 1500 * i);
+};
 
 function userChoise(){
     $(".color").click(function() {
+        // Disabling clicking on "hint" button
+        $("#Hint").off("click");
+        // Hide the "hint" button
+        $("#Hint").fadeOut();
 
         // Disabling user clicking
         $(".color").off("click");
@@ -114,7 +140,7 @@ function reviewLastChoise(){
         lengthReview();
     }else{
         gameOver();
-    }
+    };
 }
 
 function lengthReview() {
@@ -126,14 +152,14 @@ function lengthReview() {
     }else{
         playerIsAllowedToChoise = true;
         userChoise();
-    }
+    };
 }
 
 function gameOver(){
     gameIsStarted = false;
 
     // Animation 
-    $("h1, #main-section, footer").slideUp();
+    $("h1, #main-section").slideUp();
     setTimeout(() => {
         $("h1").html("Game Over <br> Press Enter to restart");
         $("h1").addClass("start-for-h1").slideDown();
@@ -143,5 +169,4 @@ function gameOver(){
     $("body").addClass("game-over");
     let sound = new Audio("sounds/wrong.mp3");
     sound.play();
-
-}
+};

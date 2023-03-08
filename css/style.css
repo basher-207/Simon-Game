@@ -42,7 +42,7 @@ div{
 }
 
 .third{
-    background-color: #D9D9D9;
+    background-color: #548556;
 }
 
 .fourth{
@@ -57,10 +57,12 @@ div{
     font-family: 'Press Start 2P', cursive;
     padding: 0.5rem 1rem;
     opacity: 0.4;
+    margin-bottom: 2rem;
 }
 
 footer{
-    margin-top: 5rem;
+    margin-top: 3rem;
+    opacity: 40%;
 }
 
 .hint:hover{
